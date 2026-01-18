@@ -6,16 +6,38 @@
 @IDE ： PyCharm
 @Motto：Code changes Everything
 """
+import os
+from dataclasses import dataclass
+
+from injector import inject
+
 from flask import request
 from openai import OpenAI
 
 
+@inject
+@dataclass
 class AppHandler:
     """应用控制器"""
 
-    def ping(self):
-        """ping接口"""
-        return {"code": 200, "message": "success", "data": "pong"}
+    # app_service: AppService
+    #
+    # def create_app(self):
+    #     """调用服务创建新的APP记录"""
+    #     app = self.app_service.create_app()
+    #     return success_message(f"应用已经成功创建，id为{app.id}")
+    #
+    # def get_app(self, id: uuid.UUID):
+    #     app = self.app_service.get_app(id)
+    #     return success_message(f"应用已经成功获取，名字是{app.name}")
+    #
+    # def update_app(self, id: uuid.UUID):
+    #     app = self.app_service.update_app(id)
+    #     return success_message(f"应用已经成功修改，修改的名字是:{app.name}")
+    #
+    # def delete_app(self, id: uuid.UUID):
+    #     app = self.app_service.delete_app(id)
+    #     return success_message(f"应用已经成功删除，id为:{app.id}")
 
     def completion(self):
         """聊天接口"""
@@ -24,8 +46,9 @@ class AppHandler:
 
         # 2. 构建OpenAI客户端，并发起请求
         client = OpenAI(
-            api_key="sk-8bd1a5ffec144461b3ac51c99d07f261",
-            base_url="https://api.deepseek.com")
+            api_key=os.getenv("OPENAI_API_KEY"),
+            base_url=os.getenv("OPENAI_API_BASE")
+        )
 
         # 3. 得到请求相应，然后将OpanAI的相应传给前端
         completion = client.chat.completions.create(
@@ -39,3 +62,7 @@ class AppHandler:
         content = completion.choices[0].message.content
 
         return {"code": 200, "message": "success", "data": content}
+
+    def ping(self):
+        """ping接口"""
+        return {"code": 200, "message": "success", "data": "pong"}
