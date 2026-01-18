@@ -1,0 +1,61 @@
+# Python 编译文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+*.egg
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# 包构建目录
+build/
+dist/
+*.egg-info/
+.installed.cfg
+
+# 环境变量文件（不要提交敏感信息）
+.env
+.env.local
+.env.production
+.env.development
+
+# 日志文件
+*.log
+logs/
+
+# 数据库文件（SQLite）
+*.sqlite
+*.sqlite3
+db.sqlite3
+
+# 测试覆盖率报告
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyCharm 项目文件（IDE 配置，建议忽略）
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VS Code 配置（如果同时使用）
+.vscode/
+
+# 系统文件
+.DS_Store
+Thumbs.db
